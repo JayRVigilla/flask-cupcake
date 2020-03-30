@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from models import db, Cupcake, connect_db
 
 API_BASE_URL = "http://www.mapquestapi.com/geocoding/v1"
@@ -11,8 +11,9 @@ app.config['SQLALCHEMY_ECHO'] = True
 connect_db(app)
 db.create_all()
 
+
 def serialize_cupcake(cupcake):
-    """ serializes a cupcakef SQLAlchemy obj to dict"""
+    """ serializes a cupcake SQLAlchemy obj to dict"""
 
     return {
         "id": cupcake.id,
@@ -65,3 +66,37 @@ def create_new_cupcake():
     serialized = serialize_cupcake(new_cupcake)
 
     return (jsonify(cupcake=serialized), 201)
+
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=["PATCH"])
+def update_cupcake(cupcake_id):
+    " update an existing cupcake "
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    cupcake.flavor = request.json["flavor"]
+    cupcake.size = request.json["size"]
+    cupcake.rating = request.json["rating"]
+
+    if request.json["image"] == '':
+        cupcake.image = None
+    else:
+        cupcake.image = request.json["image"]
+
+    db.session.commit()
+
+    serialized = serialize_cupcake(cupcake)
+
+    return (jsonify(cupcake=serialized), 200)
+
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=["DELETE"])
+def delete_cupcake(cupcake_id):
+    "delete a cupcake"
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    db.session.delete(cupcake)
+    db.session.commit()
+
+    return (jsonify(message="Deleted"), 200)
