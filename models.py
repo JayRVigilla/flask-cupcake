@@ -33,7 +33,7 @@ class Cupcake(db.Model):
 
     image = db.Column(
         db.String(),
-        nullable=False,
+        # nullable=False,
         default='https://tinyurl.com/demo-cupcake'
     )
 

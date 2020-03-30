@@ -80,7 +80,7 @@ def update_cupcake(cupcake_id):
     cupcake.rating = request.json["rating"]
 
     if request.json["image"] == '':
-        cupcake.image = None
+        cupcake.image = 'https://tinyurl.com/demo-cupcake'
     else:
         cupcake.image = request.json["image"]
 

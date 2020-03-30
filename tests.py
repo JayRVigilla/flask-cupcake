@@ -28,6 +28,13 @@ CUPCAKE_DATA_2 = {
     "image": "http://test.com/cupcake2.jpg"
 }
 
+CUPCAKE_DATA_3 = {
+    "flavor": "TestFlavor3",
+    "size": "TestSize3",
+    "rating": 15.1,
+    "image": ""
+}
+
 
 class CupcakeViewsTestCase(TestCase):
     """Tests for views of API."""
@@ -111,7 +118,7 @@ class CupcakeViewsTestCase(TestCase):
     def test_update_cupcake(self):
         with app.test_client() as client:
             url = f"/api/cupcakes/{self.cupcake.id}"
-            resp = client.patch(url, json=CUPCAKE_DATA_2)
+            resp = client.patch(url, json=CUPCAKE_DATA_3)
 
             self.assertEqual(resp.status_code, 200)
 
@@ -123,10 +130,10 @@ class CupcakeViewsTestCase(TestCase):
 
             self.assertEqual(data, {
                 "cupcake": {
-                    "flavor": "TestFlavor2",
-                    "size": "TestSize2",
-                    "rating": 10,
-                    "image": "http://test.com/cupcake2.jpg"
+                    "flavor": "TestFlavor3",
+                    "size": "TestSize3",
+                    "rating": 15.1,
+                    "image": "https://tinyurl.com/demo-cupcake"
                 }
             })
 
