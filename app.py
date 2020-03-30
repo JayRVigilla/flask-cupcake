@@ -52,11 +52,12 @@ def create_new_cupcake():
     flavor = request.json["flavor"]
     size = request.json["size"]
     rating = request.json["rating"]
+    image = request.json["image"] or None
 
-    if request.json["image"] == '':
-        image = None
-    else:
-        image = request.json["image"]
+    # if request.json["image"] == '':
+    #     image = None
+    # else:
+    #     image = request.json["image"]
 
     new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating, image=image)
 
