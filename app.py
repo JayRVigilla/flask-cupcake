@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from models import db, Cupcake, connect_db
 
 API_BASE_URL = "http://www.mapquestapi.com/geocoding/v1"
@@ -101,3 +101,10 @@ def delete_cupcake(cupcake_id):
     db.session.commit()
 
     return (jsonify(message="Deleted"), 200)
+
+
+@app.route('/')
+def show_home():
+    """ shows static homepage that shows all cupcakes and a form to add more"""
+
+    return render_template('base.html')
