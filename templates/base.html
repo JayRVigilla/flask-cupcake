@@ -9,26 +9,25 @@
 <body>
 
 <h3>All the cupcakes</h3>
-<ul id="flavors">
+<ul id="flavors"></ul>
 
-</ul>
-
-<form action="/api/cupcakes">
-<label for="">Flavor</label>
-<input type="text">
-<label for="">Size</label>
-<input type="text">
-<label for="">Rating</label>
-<input type="text">
-<label for="">Image URL</label>
-<input type="text">
+<form id='new-cupcake-form' method="POST">
+<label for="flavor">Flavor</label>
+<input id="form-flavor" type="text" name="flavor"><br>
+<label for="size">Size</label>
+<input id="form-size" type="text" name="size"><br>
+<label for="rating">Rating</label>
+<input id="form-rating" type="text" name="rating"><br>
+<label for="image">Image URL</label>
+<input id="form-image" type="text" name="image"><br>
+<button>Submit</button>
 </form>
 
-<script src='/static/script.js'></script>
-<script src='https://unpkg.com/axios/dist/axios.js'></script>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+<script src='/static/script.js'></script>
+<script src='https://unpkg.com/axios/dist/axios.js'></script>
 </body>
 </html>
